@@ -45,8 +45,8 @@ function App() {
 
 
 
-  const aoCadastrar = (nome:string,cargo:string, imagem:string, time:string, cor:string, id='') =>{
-    const colaborador = {nome, cargo, imagem, time, cor,id};
+  const aoCadastrar = (nome:string,cargo:string, imagem:string, time:string, data:string, id='', cor:string) =>{
+    const colaborador = {nome, cargo, imagem, time, data, id};
       colaborador.id = uuidv4();
       if(times.map(time => time.nome).indexOf(colaborador.time) === -1){
         const novoTime = {

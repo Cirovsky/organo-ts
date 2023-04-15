@@ -16,11 +16,12 @@ const Formulario = (props:FormularioProps) => {
 
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
+    const [data, setData] = useState('');
     const [imagem, setImagem] = useState('');
+    const [cor, setCor] = useState('#666666');
     const [time, setTime] = useState('');
     const [criaTime, setCriaTime] = useState(false);
-    const [cor, setCor] = useState('#666666');
-
+    
     const aoSubmeter = (evento:React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault();
         aoCadastrar(
@@ -28,6 +29,7 @@ const Formulario = (props:FormularioProps) => {
             cargo,
             imagem,
             time,
+            data,
             cor
         );
         {
@@ -37,6 +39,7 @@ const Formulario = (props:FormularioProps) => {
         setCargo('');
         setImagem('');
         setTime('');
+        setData('');
         setCor('#666666');
     }
 
@@ -69,6 +72,12 @@ const Formulario = (props:FormularioProps) => {
                     placeholder='Informe o endereço da imagem '
                     valor={imagem}
                     aoAlterado={valor => setImagem(valor)} />
+                <CampoTexto
+                    label='Digte a data de entrada do colaborador no time'
+                    placeholder=''
+                    valor={data}
+                    tipo= 'date'
+                    aoAlterado={valor => setData(valor)} />
                 <Checkbox
                     label='adicionar time?'
                     valor={criaTime}
