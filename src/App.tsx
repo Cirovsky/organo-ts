@@ -17,7 +17,7 @@ import { IColaborador } from "compartilhado/interfaces/IColaborador";
 function App() {
 
   const timesInicial: Array<ITime> = localStorage.times != null? 
-    JSON.parse(localStorage.getItem('times')) : [];
+    JSON.parse(localStorage.getItem('times')|| "") : [];
     
   const [times, setTimes] = useState(timesInicial);
 
@@ -38,7 +38,7 @@ function App() {
   }
 
   const  inicial:Array<IColaborador> = localStorage.colaboradores != null? 
-    JSON.parse(localStorage.getItem('colaboradores')) : [];
+    JSON.parse(localStorage.getItem('colaboradores') || "") : [];
 
   const [colaboradores, setColaboradores] = useState(inicial)
   const [form, setForm] = useState(false)
@@ -47,7 +47,6 @@ function App() {
 
   const aoCadastrar = (nome:string,cargo:string, imagem:string, time:string, cor:string, id='') =>{
     const colaborador = {nome, cargo, imagem, time, cor,id};
-    console.log(colaborador);
       colaborador.id = uuidv4();
       if(times.map(time => time.nome).indexOf(colaborador.time) === -1){
         const novoTime = {
@@ -69,7 +68,6 @@ function App() {
     const copiaColaboradores = [...colaboradores];
     const index = copiaColaboradores.indexOf(colaborador);
     copiaColaboradores.splice(index, 1);
-    console.log(index, colaborador.nome)
     setColaboradores(copiaColaboradores);
     localStorage.setItem('colaboradores', JSON.stringify(copiaColaboradores));
   }

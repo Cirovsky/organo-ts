@@ -13,9 +13,8 @@ const Checkbox = ({ label, valor, aoAlterado, zeraTime }:CheckBoxProps) => {
         <>
             <label>{label}</label>
             <input
-                label={label}
                 type='checkbox'
-                value={valor}
+                checked = {valor}
                 onChange={ () => {
                     zeraTime();
                     aoAlterado(!valor);

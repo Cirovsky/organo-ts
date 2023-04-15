@@ -32,7 +32,6 @@ const Formulario = (props:FormularioProps) => {
         );
         {
             setCriaTime(false);
-            console.log(criaTime);
         }
         setNome('');
         setCargo('');
@@ -68,6 +67,7 @@ const Formulario = (props:FormularioProps) => {
                 <CampoTexto
                     label='Imagem'
                     placeholder='Informe o endereço da imagem '
+                    valor={imagem}
                     aoAlterado={valor => setImagem(valor)} />
                 <Checkbox
                     label='adicionar time?'
