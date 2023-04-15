@@ -1,11 +1,11 @@
-import { useState } from 'react'
 import './colaborador.css'
 import {AiFillCloseCircle} from 'react-icons/ai'
+import { IColaborador } from 'compartilhado/interfaces/IColaborador';
 
 interface ColaboradorProps{
-    colaborador: Object;
+    colaborador: IColaborador;
     cor: string;
-    deletarColaborador: Function;
+    deletarColaborador: (arg0: IColaborador) => void;
 }
 
 const Colaborador = ({ colaborador, cor, deletarColaborador} :ColaboradorProps) => {

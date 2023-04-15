@@ -4,24 +4,30 @@ interface ListaSupensaProps {
     label: string;
     items: Array<string>;
     valor: string;
-    aoAlterado: Function;
+    aoAlterado: (valor: string) => void;
     obrigatorio: boolean;
-    opcional: Boolean;
+    opcional: boolean;
 
 
 }
 
-const ListaSuspensa = (props:ListaSupensaProps) => {
+const ListaSuspensa = (props: ListaSupensaProps) => {
 
-    const {label, items,  valor, aoAlterado, obrigatorio, opcional} = props;
+    const { label, items, valor, aoAlterado, obrigatorio, opcional } = props;
 
-    return !opcional&& items.length > 0 &&(<div className="lista-suspensa">
-        <label>{label}</label>
-        <select required={obrigatorio} value={valor} onChange={evento => aoAlterado(evento.target.value)}>
-            <option />
-            {items.map(item => <option key={item}>{item}</option>)}
-        </select>
-    </div>)
+    if (!opcional && items.length > 0) {
+        return(
+        <div className="lista-suspensa">
+            <label>{label}</label>
+            <select required={obrigatorio} value={valor} onChange={evento => aoAlterado(evento.target.value)}>
+                <option />
+                {items.map(item => <option key={item}>{item}</option>)}
+            </select>
+        </div>
+        )
+    }else{
+        return <></>
+    }
 }
 
 export default ListaSuspensa

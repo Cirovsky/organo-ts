@@ -3,8 +3,8 @@ import './Checkbox.css'
 interface CheckBoxProps{
     label: string;
     valor: boolean;
-    aoAlterado: Function;
-    zeraTime: Function;
+    aoAlterado: (valor: boolean) => void;
+    zeraTime: (arg0: void) => string;
 }
 
 
@@ -17,7 +17,7 @@ const Checkbox = ({ label, valor, aoAlterado, zeraTime }:CheckBoxProps) => {
                 type='checkbox'
                 value={valor}
                 onChange={ () => {
-                    zeraTime()
+                    zeraTime();
                     aoAlterado(!valor);
                 }}
             />

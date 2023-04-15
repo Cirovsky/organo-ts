@@ -6,24 +6,28 @@ import Rodape from "./componentes/Rodape";
 import Time from "./componentes/Time";
 import Botao from "./componentes/Botao";
 
+import { ITime } from "compartilhado/interfaces/ITime";
+
 import {v4 as uuidv4} from 'uuid';
 import {BiAddToQueue} from 'react-icons/bi'
 
 import './App.css';
+import { IColaborador } from "compartilhado/interfaces/IColaborador";
 
 function App() {
 
-  const timesInicial = localStorage.times != null? 
+  const timesInicial: Array<ITime> = localStorage.times != null? 
     JSON.parse(localStorage.getItem('times')) : [];
+    
   const [times, setTimes] = useState(timesInicial);
 
-  function addNovoTime(novoTime){
+  function addNovoTime(novoTime:ITime){
     const novaListaTimes = [...times, novoTime ];
     setTimes(novaListaTimes);
     localStorage.setItem('times', JSON.stringify(novaListaTimes));
   }
 
-  function mudarCorTime (cor, id){
+  function mudarCorTime (cor:string, id:string){
     setTimes(times.map( time =>{
       if(time.id === id){
         time.cor = cor;
@@ -33,18 +37,16 @@ function App() {
     localStorage.setItem('times', JSON.stringify(times));
   }
 
-  const  inicial = localStorage.colaboradores != null? 
+  const  inicial:Array<IColaborador> = localStorage.colaboradores != null? 
     JSON.parse(localStorage.getItem('colaboradores')) : [];
 
   const [colaboradores, setColaboradores] = useState(inicial)
-
-  console.log(colaboradores)
   const [form, setForm] = useState(false)
 
 
 
-  const aoCadastrar = (nome,cargo, imagem, time, cor) =>{
-    const colaborador = {nome, cargo, imagem, time, cor};
+  const aoCadastrar = (nome:string,cargo:string, imagem:string, time:string, cor:string, id='') =>{
+    const colaborador = {nome, cargo, imagem, time, cor,id};
     console.log(colaborador);
       colaborador.id = uuidv4();
       if(times.map(time => time.nome).indexOf(colaborador.time) === -1){
@@ -63,7 +65,7 @@ function App() {
       localStorage.setItem('colaboradores', JSON.stringify([...colaboradores, colaborador]));
   }
 
-  const deletarColaborador = (colaborador) =>{
+  const deletarColaborador = (colaborador:IColaborador) =>{
     const copiaColaboradores = [...colaboradores];
     const index = copiaColaboradores.indexOf(colaborador);
     copiaColaboradores.splice(index, 1);
@@ -77,8 +79,7 @@ function App() {
       <Banner enderecoImagem="/imagens/banner.png" textoAlternativo="Logo do Organo" />
       <section style={{display: `${form? 'block': 'none'}`}}>
       <Formulario 
-        times={times.length > 0 && times.map(time => time.nome)} 
-        addNovoTime={addNovoTime} 
+        times={times.length > 0? times.map(time => time.nome): []}
         aoCadastrar={aoCadastrar} />
       </section>
       <div className="container container__abrir-formulario">
@@ -91,7 +92,7 @@ function App() {
           time={time}
           deletarColaborador={deletarColaborador}
           mudarCor={mudarCorTime}
-          colaboradores={colaboradores.filter(colaborador => colaborador.time === time.id)} />)}
+          colaboradores={colaboradores.filter((colaborador:IColaborador) => colaborador.time === time.id)} />)}
       </section>
       <Rodape />
     </div>

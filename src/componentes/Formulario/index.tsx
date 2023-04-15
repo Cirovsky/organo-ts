@@ -7,13 +7,12 @@ import Checkbox from '../Checkbox';
 
 interface FormularioProps{
     aoCadastrar: Function;
-    times: Array<Object>;
-    addNovoTime: Function;
+    times: string[];
 }
 
 const Formulario = (props:FormularioProps) => {
 
-    const { aoCadastrar, times, addNovoTime } = props;
+    const { aoCadastrar, times } = props;
 
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
@@ -22,7 +21,7 @@ const Formulario = (props:FormularioProps) => {
     const [criaTime, setCriaTime] = useState(false);
     const [cor, setCor] = useState('#666666');
 
-    const aoSubmeter = (evento:HTMLFormElement) => {
+    const aoSubmeter = (evento:React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault();
         aoCadastrar(
             nome,
@@ -31,6 +30,12 @@ const Formulario = (props:FormularioProps) => {
             time,
             cor
         );
+        setCriaTime(false);
+        setNome('');
+        setCargo('');
+        setImagem('');
+        setTime('');
+        setCor('#666666');
     }
 
     function zeraTime(){
@@ -71,7 +76,6 @@ const Formulario = (props:FormularioProps) => {
                     label='Times'
                     items={times}
                     opcional={criaTime}
-                    criaTime={criaTime}
                     valor={time}
                     aoAlterado={valor => setTime(valor)} />
                 <div className='campo__add-time' style={{display: `${criaTime? 'grid': 'none'}`}}>

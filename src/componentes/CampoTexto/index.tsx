@@ -3,9 +3,9 @@ import './campo-texto.css'
 interface CampoTextoProps{
     label: string;
     placeholder: string;
-    valor: string;
-    obrigatorio: boolean;
-    campoMenor: string;
+    valor?: string;
+    obrigatorio?: boolean;
+    campoMenor?: string;
     aoAlterado: (valor:string) => void;
 }
 

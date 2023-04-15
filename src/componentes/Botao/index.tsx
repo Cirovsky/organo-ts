@@ -2,10 +2,10 @@ import { ReactElement } from 'react'
 import './Botao.css'
 
 interface BotaoProps {
-    children: ReactElement;
-    form: boolean;
-    botaoAbrirForm: string;
-    evento: React.Dispatch<React.SetStateAction<boolean>>;
+    children?: ReactElement | string;
+    form?: boolean;
+    botaoAbrirForm?: string;
+    evento?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Botao = ({children, form, botaoAbrirForm, evento }: BotaoProps) => {
