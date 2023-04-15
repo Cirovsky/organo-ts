@@ -30,7 +30,10 @@ const Formulario = (props:FormularioProps) => {
             time,
             cor
         );
-        setCriaTime(false);
+        {
+            setCriaTime(false);
+            console.log(criaTime);
+        }
         setNome('');
         setCargo('');
         setImagem('');
